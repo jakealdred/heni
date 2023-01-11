@@ -1,0 +1,29 @@
+Question 4
+
+1) Given 2 tables...
+   Inner join: Returns only the records present in both tables
+   Left join: Returns all records from table1 and any records from table2 that are also in table1
+   Right join: Returns all records from table2 and any records from table1 that are also in table2
+   Full join: Returns all records from both tables regardless of whether there's a match 
+
+2a) select arr_time, origin, dest, name 
+	from flights
+	join airlines
+	on flights.carrier = airlines.carrier 
+
+2b) select arr_time, origin, dest, name 
+	from flights
+	join airlines
+	on flights.carrier = airlines.carrier 
+	where airlines.name like 'JetBlue%'
+
+2c) select origin, count(*) as numFlights
+	from flights
+	group by origin
+	order by numFlights asc 
+
+2d) select origin, numFlights
+	from (select origin, count(*) as numFlights
+		  from flights
+		  group by origin) as flight_data
+    where flight_data.numFlights > 10000
