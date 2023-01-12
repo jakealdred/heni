@@ -47,7 +47,7 @@ class BearspaceSpider(scrapy.Spider):
                     description = list(map(lambda x: re.sub(re.compile('<.*?>'), ' ', x), raw_description.split('<br>')))
 
                 for desc in description:
-                    if ('x' in desc.lower() and 'cm' in desc.lower()) or 'artist:' in desc.lower():
+                    if re.findall('(?:height|x|X)+\s?\d+(?:\.\d+)?\s?(?:x|X|h|H)?', desc) or 'artist:' in desc.lower() or desc == 'Set of four ':
                         pass
                     else:
                         item['media'] = desc
